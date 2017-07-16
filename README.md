@@ -1,1 +1,1 @@
-# astro-pointer
+# astro-pointer# Dependencies:1. Install quick2wire: https://github.com/quick2wire/quick2wire-python-api
