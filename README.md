@@ -5,9 +5,8 @@
 1. Install quick2wire: https://github.com/quick2wire/quick2wire-python-api
 
 # Things it can point at:
-* All the planets
+* The planets
 * The moon
-* ISS
-* HST
-* Stars 
-* Other objs
+* Satellites listed on Celestrack
+
+WIP
