@@ -4,6 +4,7 @@ from skyfield.api import Topos, load
 # hamming distance for searching
 # searchable constellations/stars
 # browse celestrak for these
+# fix donwloaded files
 
 # get latitude and longitude from phone location
 latitude = '-27.469771 S'
