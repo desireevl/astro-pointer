@@ -1,4 +1,5 @@
 # Points to things in the sky
+Creating a tool that uses a laser to point to objects in the sky controlled by a web app. WIP
 
 # Dependencies:
 
@@ -8,5 +9,3 @@
 * The planets
 * The moon
 * Satellites listed on Celestrack
-
-WIP
