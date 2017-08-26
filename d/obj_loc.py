@@ -68,7 +68,6 @@ if __name__ == '__main__':
     print('Moving...')
 
     alt, az, distance = obj_location(result, latitude, longitude)
-
     rotate_to_azimuth(az)
     turn_to_altitude(alt)
 
