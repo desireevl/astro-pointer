@@ -71,4 +71,6 @@ if __name__ == '__main__':
     rotate_to_azimuth(az)
     turn_to_altitude(alt)
 
+    print('alt: {}, az: {}'.format(alt, az))
+
     print('Thanks for using astro-pointer!')
