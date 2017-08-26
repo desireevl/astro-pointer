@@ -1,28 +1,6 @@
 from skyfield.api import Topos, load
-
-# get current coordinates from phone
-# searchable constellations/stars
-# browse celestrak for these
-# fix donwloaded files
-
-# get latitude and longitude from phone location
-latitude = '-27.469771 S'
-longitude = '153.025124 E'
-
-# get desired object
-des_obj = 'ISS (ZARYA)'
-
-# gets current time
-ts = load.timescale()
-curr_time = ts.now()
-
-# loads ephemeris, gets planet locations
-planets = load('de421.bsp')
-
-# gets satellite element set
-# celestrak updates positions
-stations_url = 'http://celestrak.com/NORAD/elements/stations.txt'
-satellites = load.tle(stations_url)
+from ham import levenshtein_dist
+from .driver import rotate_to_azimuth, turn_to_altitude
 
 def obj_location(obj, lat, long):
     try:
@@ -49,4 +27,46 @@ def obj_location(obj, lat, long):
 
     return alt.degrees, az.degrees, distance
 
-print(obj_location(des_obj, latitude, longitude))
+if __name__ == '__main__':
+    # get current coordinates from phone
+    # searchable constellations/stars
+    # browse celestrak for these
+    # fix donwloaded files
+
+    # get latitude and longitude from phone location
+    latitude = '-27.469771 S'
+    longitude = '153.025124 E'
+
+    # get desired object
+    des_obj = input('Please enter a name: ')
+
+    # gets current time
+    ts = load.timescale()
+    curr_time = ts.now()
+
+    # loads ephemeris, gets planet locations
+    planets = load('de421.bsp')
+
+    # gets satellite element set
+    # celestrak updates positions
+    stations_url = 'http://celestrak.com/NORAD/elements/stations.txt'
+    satellites = load.tle(stations_url)
+
+    similiar_or_exact_names = levenshtein_dist(des_obj)
+
+    if type(similiar_or_exact_names) != list:
+        result = similiar_or_exact_names
+
+    else:
+        print('Please select object: ')
+        for idx, i in enumerate(similiar_or_exact_names):
+            print('{}: {}'.format(idx, i))
+        idx = input('Your input: ')
+        result = similiar_or_exact_names[int(idx)]
+
+    print('You chose: {}'.format(result))
+    print('Moving...')
+
+    alt, az, distance = obj_location(result, latitude, longitude)
+
+    print(alt)

@@ -6,17 +6,17 @@ from skyfield.api import load
 import distance
 import pandas as pd
 
+
 def levenshtein_dist(des_obj):
     stations_url = 'http://celestrak.com/NORAD/elements/stations.txt'
     satellites = load.tle(stations_url)
 
-    satellites_lowercase = {k.lower(): i for k, i in satellites.items()}
-    satellites_list = [k.lower() for k in satellites]
+    satellites_list = [k for k in satellites]
 
     other_objs = pd.read_csv('other_objs_list.csv')
     x = other_objs.values
 
-    satellites_list_with_score = list(map(lambda x: (x, distance.levenshtein(des_obj, x)), satellites_list))
+    satellites_list_with_score = list(map(lambda x: (x, distance.levenshtein(des_obj.lower(), x.lower())), satellites_list))
 
     has_exact_match_list = list(filter(lambda x: x[1] == 0, satellites_list_with_score))
     similar_matches_list = list(map(lambda x: x[0], filter(lambda x: x[1] <= 3, satellites_list_with_score)))
@@ -26,5 +26,6 @@ def levenshtein_dist(des_obj):
     else:
         return similar_matches_list
 
-print(levenshtein_dist('tiangong-'))
+if __name__ == '__main__':
+    print(levenshtein_dist('TIangong'))
 

@@ -1,6 +1,7 @@
 import math
+
 from . import i2c
-from time import *
+
 
 class i2c_hmc5883l:
 
