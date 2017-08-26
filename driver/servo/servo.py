@@ -10,8 +10,8 @@ p.start(2.5)
 
 while True:
     p.ChangeDutyCycle(2.5) # 0 degree
-    time.sleep(5)
-    p.ChangeDutyCycle(7.5)
-    time.sleep(5)
-    p.ChangeDutyCycle(12.5)
-    time.sleep(5)
+    time.sleep(1)
+    p.ChangeDutyCycle(6.75)
+    time.sleep(1)
+    p.ChangeDutyCycle(10.5)
+    time.sleep(1)
