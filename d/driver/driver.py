@@ -1,8 +1,8 @@
 import time
 import RPi.GPIO as GPIO
 
-from motors import StepperMotor
-from hmc5883l import i2c_hmc5883l
+from .motors import StepperMotor
+from .hmc5883l import i2c_hmc5883l
 
 
 """ Servo """

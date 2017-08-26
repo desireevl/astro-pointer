@@ -1,6 +1,6 @@
 from skyfield.api import Topos, load
 from ham import levenshtein_dist
-from .driver import rotate_to_azimuth, turn_to_altitude
+from driver.driver import rotate_to_azimuth, turn_to_altitude
 
 def obj_location(obj, lat, long):
     try:
@@ -69,4 +69,7 @@ if __name__ == '__main__':
 
     alt, az, distance = obj_location(result, latitude, longitude)
 
-    print(alt)
+    rotate_to_azimuth(az)
+    turn_to_altitude(alt)
+
+    print('Thanks for using astro-pointer!')
