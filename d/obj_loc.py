@@ -1,7 +1,6 @@
 from skyfield.api import Topos, load
 
 # get current coordinates from phone
-# hamming distance for searching
 # searchable constellations/stars
 # browse celestrak for these
 # fix donwloaded files
