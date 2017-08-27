@@ -9,4 +9,5 @@ Creating a tool that uses a laser to point to objects in the sky controlled by a
 * The planets
 * The moon
 * Satellites listed on Celestrack
+* Brightest stars
 
