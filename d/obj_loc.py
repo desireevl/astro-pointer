@@ -1,29 +1,37 @@
 from skyfield.api import Topos, load
 from ham import levenshtein_dist
+from stars import STAR_OBJS, STARS
 from driver.driver import rotate_to_azimuth, turn_to_altitude
 
 def obj_location(obj, lat, long):
-    try:
-        curr_obj = planets[obj]
-        earth = planets['Earth']
+    earth = planets['Earth']
 
-        # topocentric is position measured relative to location on earth
+    if obj in STARS:
         curr_loc = earth + Topos(lat, long)
-        # .observe backdates to account for c (astrometric), .apparent takes deflection and abberation into account
-        apparent_loc = curr_loc.at(curr_time).observe(curr_obj).apparent()
+        astrometric = curr_loc.at(curr_time).observe(STAR_OBJS[obj]).apparent()
+        alt, az, distance = astrometric.altaz()
 
-        # positive altitude is above horizon, negative is below
-        # azimuth is angle, 0deg at north
-        # altaz(temperature_C= , pressure_mbar= )
-        alt, az, distance = apparent_loc.altaz()
+    else:
+        try:
+            curr_obj = planets[obj]
 
-    except:
-        satellite = satellites[obj]
-        # subtracts vector location of observer from satellite
-        difference = satellite - Topos(lat,long)
-        # converts this difference to coordinates
-        topocentric = difference.at(curr_time)
-        alt, az, distance = topocentric.altaz()
+            # topocentric is position measured relative to location on earth
+            curr_loc = earth + Topos(lat, long)
+            # .observe backdates to account for c (astrometric), .apparent takes deflection and abberation into account
+            apparent_loc = curr_loc.at(curr_time).observe(curr_obj).apparent()
+
+            # positive altitude is above horizon, negative is below
+            # azimuth is angle, 0deg at north
+            # altaz(temperature_C= , pressure_mbar= )
+            alt, az, distance = apparent_loc.altaz()
+
+        except:
+            satellite = satellites[obj]
+            # subtracts vector location of observer from satellite
+            difference = satellite - Topos(lat,long)
+            # converts this difference to coordinates
+            topocentric = difference.at(curr_time)
+            alt, az, distance = topocentric.altaz()
 
     return alt.degrees, az.degrees, distance
 

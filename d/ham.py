@@ -3,6 +3,7 @@
 # make input lowercase
 # if only one suggestion use that
 from skyfield.api import load
+from stars import STARS
 import distance
 
 def clean_names(name):
@@ -24,6 +25,7 @@ def levenshtein_dist(des_obj):
 
     satellites_list = [k for k in satellites]
     satellites_list.extend(["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Moon", "Sun"])
+    satellites_list.extend(STARS)
 
     satellites_list_with_score = list(map(lambda x: (x, distance.levenshtein(des_obj.lower(), x.lower())), satellites_list))
 
