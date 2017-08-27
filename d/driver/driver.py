@@ -36,8 +36,13 @@ def rotate_to_azimuth(degrees, variation=1.0):
 
     degreesMin, degreesMax = 0, 0
 
-    degrees = min(360, degrees)
-    degrees = max(0, degrees)
+    degrees = degrees + 105
+
+    if degrees > 360:
+        degrees = degrees - 360
+
+    if degrees < 0:
+        degrees = 360 + degrees
 
     if degrees > 359.0:
         degreesMin = degrees - variation
@@ -56,6 +61,7 @@ def rotate_to_azimuth(degrees, variation=1.0):
         else:
             STEPPERMOTOR.step_forwards_degree(1.0)
 
+        print(curHeading)
         curHeading, _ = HMC5883L.getHeading()
         time.sleep(0.001)
 
@@ -69,10 +75,12 @@ def turn_to_altitude(degrees):
         print('Cannot turn that way, wait for version 2!')
         return
 
+    if degrees > 180:
+        degrees = degrees - 180
+
     scaled_value = arduino_map(float(degrees), 0.0, 180.0, 2.75, 10.5)
     SERVO.ChangeDutyCycle(scaled_value)
     time.sleep(1)
-
 
 if __name__ == '__main__':
     rotate_to_azimuth(100)
