@@ -36,7 +36,7 @@ def rotate_to_azimuth(degrees, variation=1.0):
 
     degreesMin, degreesMax = 0, 0
 
-    degrees = degrees + 105
+    degrees = degrees + 90
 
     if degrees > 360:
         degrees = degrees - 360
