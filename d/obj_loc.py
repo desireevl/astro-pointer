@@ -34,7 +34,7 @@ if __name__ == '__main__':
     # fix donwloaded files
 
     # get latitude and longitude from phone location
-    latitude = '-27.469771 S'
+    latitude = '27.469771 S'
     longitude = '153.025124 E'
 
     # get desired object
@@ -68,6 +68,7 @@ if __name__ == '__main__':
     print('Moving...')
 
     alt, az, distance = obj_location(result, latitude, longitude)
+    print(alt,az,distance)
     rotate_to_azimuth(az)
     turn_to_altitude(alt)
 
